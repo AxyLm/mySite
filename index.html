@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh" class="text-gray-900 leading-tight">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mySite</title>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
+  <style>
+    @font-face {
+      /* font-properties */
+      font-family: ZpixReviewLocal;
+      src: url(./src/assets/fonts/zpix.woff2)
+    }
+
+    @font-face {
+      font-family: ZpixReviewOnline;
+      src: url(https://zpix.now.sh/zpix.woff2?v2021-03-21);
+    }
+
+    @font-face {
+      font-family: 'Press Start 2P';
+      font-style: normal;
+      font-weight: 400;
+      src: url(./src/assets/fonts/PressStart2P-Regular.woff2)
+    }
+
+    html,
+    body,
+    pre,
+    code,
+    kbd,
+    samp {
+      font-family: ZpixReviewLocal, ZpixReviewOnline, sans-serif;
+    }
+
+    html.dark {
+      background: #121212;
+    }
+  </style>
+  <script>
+    (function () {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
+      if (setting === 'dark' || (prefersDark && setting !== 'light'))
+        document.documentElement.classList.toggle('dark', true)
+    })()
+  </script>
+</head>
+
+<body class="min-h-screen bg-gray-100 dark:bg-trueGray-900 dark:text-trueGray-50">
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
