@@ -8,22 +8,13 @@
 </script>
 
 <template>
-	<div class="text-center p-20">
+	<div class="text-center py-10 px-10">
 		<!-- <span class="text-5xl fm1">{{t("hello")}}</span>
 		<span class="text-5xl fm2">{{t("hello")}}</span>-->
-		<router-link to="/foo">
-			<button
-				class="bg-purple-600 w-16 h-6 bg-blue-6 text-gray-50 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ..."
-			>Foo</button>
-		</router-link>
-		<router-link to="/about">
-			<button
-				class="ml-3 bg-purple-600 w-16 h-6 bg-blue-6 text-gray-50 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ..."
-			>Back</button>
-		</router-link>
-		<div>
-			<router-view />
-		</div>
+		
+		
+		<div class="mt-10"></div>
+		<router-view />
 		<move-contain v-slot="slot">
 			<Image v-bind="slot" />
 		</move-contain>
