@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    'ICarbon:close': typeof import('~icons/carbon/close')['default']
     ICarbonCheckmarkFilled: typeof import('~icons/carbon/checkmark-filled')['default']
     ICarbonLanguage: typeof import('~icons/carbon/language')['default']
     ICarbonMoon: typeof import('~icons/carbon/moon')['default']
