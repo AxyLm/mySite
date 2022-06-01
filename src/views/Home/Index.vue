@@ -2,11 +2,7 @@
 	import { useI18n } from "vue-i18n";
 	import { ref } from "vue";
 	import Abi from "./perp.json";
-	import {
-		contractReadRule,
-		contractWriteRule,
-		abiFn,
-	} from "~/util/abiGenRule";
+	import { contractReadRule, contractWriteRule, abiFn } from "~/util/abiGenRule";
 	const { t } = useI18n();
 
 	const abiJson = ref<string>(JSON.stringify(Abi));
@@ -55,7 +51,7 @@
 
 <template>
 	<div style="height:calc(100vh - 6rem)">
-		<div class="mt-4 px-4 ">
+		<div class="mt-4 px-4">
 			<div class="w-1/3">
 				<label for="Name" class="block mb-1 text-gray-600 text-xl font-medium">fn name filter</label>
 				<div class="inline-flex w-full border">
@@ -86,8 +82,14 @@
 			</div>
 		</div>
 		<div class="w-full h-4/5 flex dark:text-base-7">
-			<textarea v-model="abiJson" class="w-full h-full m-0 border bg-transparent border-solid border-current mr-1"></textarea>
-			<textarea v-model="classGen" class="w-full h-full m-0 border bg-transparent border-solid border-current"></textarea>
+			<textarea
+				v-model="abiJson"
+				class="w-full h-full m-0 border bg-transparent border-solid border-current mr-1"
+			></textarea>
+			<textarea
+				v-model="classGen"
+				class="w-full h-full m-0 border bg-transparent border-solid border-current"
+			></textarea>
 		</div>
 	</div>
 </template>
