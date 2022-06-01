@@ -23,7 +23,7 @@ async ${fn.name}(${parameterGen(fn.inputs)}) {
 `;
 };
 export const parameterGen = (params: abiParam[]) => {
-	return params.map((e) => e.internalType).join(", ");
+	return params.map((e) => e.name).join(", ");
 };
 export const paramsGen = (params: abiParam[]) => {
 	const str = params.map((e) => {
@@ -33,7 +33,7 @@ export const paramsGen = (params: abiParam[]) => {
 };
 
 export const exegesisGen = (fn: abiFn) => {
-	return`
+	return `
 /**
  * ${fn.name}${paramsGen(fn.inputs) || ""}
  * @returns res
@@ -44,7 +44,7 @@ export type abiFn = {
 	inputs: abiParam[];
 	name: string;
 	outputs: abiParam[];
-	stateMutability: "view" | "nonpayable";
+	stateMutability: "view" | "nonpayable" | "event";
 	type: "function" | "constructor";
 };
 export type abiParam = {
