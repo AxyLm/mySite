@@ -2,7 +2,12 @@
 	import { useI18n } from "vue-i18n";
 	import { ref } from "vue";
 	import Abi from "./perp.json";
-	import { contractReadRule, contractWriteRule, abiFn } from "~/util/abiGenRule";
+	import {
+		contractReadRule,
+		contractWriteRule,
+		abiFn,
+		autoGenClass,
+	} from "~/util/abiGenRule";
 	const { t } = useI18n();
 
 	const abiJson = ref<string>(JSON.stringify(Abi));
@@ -13,39 +18,12 @@
 		event: false,
 		nameFilter: undefined,
 	});
+	const className = ref("OneAutoGenFun");
 	const genClass = () => {
 		const AbiJson: abiFn[] = JSON.parse(abiJson.value);
 
-		const code = AbiJson.map((e) => {
-			if (e.type === "function") {
-				if (fnGenRule.value.nameFilter) {
-					const nameFilter: string = fnGenRule.value.nameFilter;
-					let nameFilters: string[] = [nameFilter];
-					if (nameFilter.indexOf(",") > -1) {
-						nameFilters = nameFilter.split(",");
-					}
-
-					if (
-						nameFilters.every((filter) => e.name.indexOf(filter) == -1)
-					) {
-						return undefined;
-					}
-				}
-
-				if (fnGenRule.value.read && e.stateMutability === "view") {
-					const str = contractReadRule(e);
-					return str;
-				}
-
-				if (fnGenRule.value.write && e.stateMutability === "nonpayable") {
-					const str = contractWriteRule(e);
-					return str;
-				}
-			}
-
-			return undefined;
-		});
-		classGen.value = code.filter((e) => !!e).join("");
+		const code = autoGenClass(className.value	, AbiJson, fnGenRule.value);
+		classGen.value = code
 	};
 </script>
 
@@ -53,6 +31,18 @@
 	<div style="height:calc(100vh - 6rem)">
 		<div class="mt-4 px-4">
 			<div class="w-1/3">
+				<label for="className" class="block mb-1 text-gray-600 text-xl font-medium">class name</label>
+				<div class="inline-flex w-full border">
+					<input
+						type="text"
+						class="w-full px-4 py-2 rounded focus:outline-none focus:text-gray-600 bg-transparent"
+						v-model="className"
+						placeholder="关键字、regexp；多个用,分割"
+					/>
+					<div class="w-1/12 pt-2 bg-gray-100 text-center" @click="className = ''">
+						<i-carbon:close />
+					</div>
+				</div>
 				<label for="Name" class="block mb-1 text-gray-600 text-xl font-medium">fn name filter</label>
 				<div class="inline-flex w-full border">
 					<input
